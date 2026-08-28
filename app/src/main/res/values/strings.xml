@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AutomaPoko</string>
+
+    <!-- Tela principal -->
+    <string name="screen_home_title">Minhas automações</string>
+    <string name="screen_home_empty_title">Nenhuma automação ainda</string>
+    <string name="screen_home_empty_subtitle">Toque no botão + para criar sua primeira automação</string>
+    <string name="btn_new_automation">Nova automação</string>
+
+    <!-- Filtros -->
+    <string name="filter_all">Todas</string>
+    <string name="filter_bluetooth">Bluetooth</string>
+    <string name="filter_wifi">Wi-Fi</string>
+    <string name="filter_location">Localização</string>
+
+    <!-- Status -->
+    <string name="status_active">Ativa</string>
+    <string name="status_inactive">Inativa</string>
+    <string name="status_paused">Pausada</string>
+
+    <!-- Gatilhos -->
+    <string name="trigger_bluetooth">Bluetooth conectado</string>
+    <string name="trigger_bluetooth_disconnected">Bluetooth desconectado</string>
+    <string name="trigger_wifi">Wi-Fi conectado</string>
+    <string name="trigger_wifi_disconnected">Wi-Fi desconectado</string>
+    <string name="trigger_location_enter">Ao entrar no local</string>
+    <string name="trigger_location_exit">Ao sair do local</string>
+
+    <!-- Ações -->
+    <string name="action_open_app">Abrir aplicativo</string>
+
+    <!-- Criação -->
+    <string name="create_title">Nova automação</string>
+    <string name="edit_title">Editar automação</string>
+    <string name="step_name">Nome</string>
+    <string name="step_trigger">Quando…</string>
+    <string name="step_trigger_config">Configurar gatilho</string>
+    <string name="step_action">Então…</string>
+    <string name="step_app">Selecionar aplicativo</string>
+    <string name="step_review">Resumo</string>
+    <string name="hint_automation_name">Nome da automação</string>
+    <string name="btn_next">Continuar</string>
+    <string name="btn_back">Voltar</string>
+    <string name="btn_save">Salvar automação</string>
+    <string name="btn_edit">Editar</string>
+    <string name="btn_delete">Excluir</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_confirm">Confirmar</string>
+
+    <!-- Confirmação de exclusão -->
+    <string name="delete_confirm_title">Excluir automação?</string>
+    <string name="delete_confirm_message">A automação "%1$s" será excluída permanentemente.</string>
+
+    <!-- Histórico -->
+    <string name="history_title">Histórico</string>
+    <string name="history_empty">Nenhuma execução nos últimos 7 dias</string>
+    <string name="history_success">Executada com sucesso</string>
+    <string name="history_failure">Falha na execução</string>
+
+    <!-- Diagnóstico -->
+    <string name="diagnostic_permission_bluetooth">Permissão de Bluetooth negada. Toque para corrigir.</string>
+    <string name="diagnostic_permission_location">Permissão de localização negada. Toque para corrigir.</string>
+    <string name="diagnostic_permission_background_location">Permissão de localização em segundo plano negada. Toque para corrigir.</string>
+    <string name="diagnostic_permission_overlay">Permissão para exibir sobre outros apps negada. Toque para corrigir.</string>
+    <string name="diagnostic_app_not_found">Aplicativo configurado não está mais instalado.</string>
+    <string name="diagnostic_gps_disabled">GPS desativado. A automação pode não funcionar com precisão.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Configuração inicial</string>
+    <string name="onboarding_overlay_title">Abrir apps automaticamente</string>
+    <string name="onboarding_overlay_desc">Para abrir apps sem você tocar na tela, o AutomaPoko precisa de permissão para exibir sobre outros aplicativos. Você será direcionado para as configurações do sistema.</string>
+    <string name="onboarding_autostart_title">Manter ativo em segundo plano</string>
+    <string name="onboarding_autostart_desc">No HyperOS (Xiaomi), é necessário ativar o Início automático do AutomaPoko para que as automações funcionem mesmo com o app fechado.</string>
+    <string name="onboarding_battery_title">Isentar da otimização de bateria</string>
+    <string name="onboarding_battery_desc">Impede que o sistema encerre o AutomaPoko em segundo plano. Você será direcionado para as configurações do sistema.</string>
+    <string name="onboarding_btn_grant">Conceder permissão</string>
+    <string name="onboarding_btn_skip">Pular por agora</string>
+    <string name="onboarding_btn_done">Concluir configuração</string>
+
+    <!-- Bluetooth -->
+    <string name="bluetooth_select_device">Selecionar dispositivo</string>
+    <string name="bluetooth_no_devices">Nenhum dispositivo pareado encontrado</string>
+    <string name="bluetooth_event_label">Disparar quando</string>
+    <string name="bluetooth_event_connected">Dispositivo conectar</string>
+    <string name="bluetooth_event_disconnected">Dispositivo desconectar</string>
+
+    <!-- Wi-Fi -->
+    <string name="wifi_scanning">Buscando redes…</string>
+    <string name="wifi_no_networks">Nenhuma rede encontrada no momento</string>
+    <string name="wifi_select_network">Selecionar rede Wi-Fi</string>
+    <string name="wifi_event_label">Disparar quando</string>
+    <string name="wifi_event_connected">Conectar à rede</string>
+    <string name="wifi_event_disconnected">Desconectar da rede</string>
+
+    <!-- Localização -->
+    <string name="location_search_hint">Buscar endereço ou local</string>
+    <string name="location_use_current">Usar localização atual</string>
+    <string name="location_radius_label">Raio de ativação</string>
+    <string name="location_radius_meters">%1$d metros</string>
+    <string name="location_event_label">Disparar quando</string>
+    <string name="location_event_enter">Entrar no local</string>
+    <string name="location_event_exit">Sair do local</string>
+
+    <!-- Erros genéricos -->
+    <string name="error_generic">Algo deu errado. Tente novamente.</string>
+    <string name="error_name_required">O nome da automação é obrigatório.</string>
+</resources>
