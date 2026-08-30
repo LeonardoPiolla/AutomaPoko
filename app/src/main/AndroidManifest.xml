@@ -124,6 +124,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+            <!-- Google Maps API Key (necessária para o mapa de localização) -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
     </application>
 
 </manifest>

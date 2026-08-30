@@ -8,21 +8,19 @@ plugins {
 
 android {
     namespace = "com.automapoko.app"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.automapoko.app"
-        minSdk = 34
-        targetSdk = 36
+        minSdk = 26
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Google Maps API Key — substituir por chave real para tiles no mapa
+        manifestPlaceholders["MAPS_API_KEY"] = ""
 
-        // Necessário para o Room processar corretamente
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -43,6 +41,7 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
@@ -61,7 +60,16 @@ android {
     }
 }
 
+// Configuração do KSP para Room — fora do bloco android
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
+}
+
 dependencies {
+    // Desugaring — necessário para java.time.Instant em minSdk < 26
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+
     // Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
