@@ -29,7 +29,17 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK debug
-        run: ./gradlew assembleDebug --stacktrace --info
+        id: build
+        run: ./gradlew assembleDebug 2>&1 | tee build_output.txt; exit ${PIPESTATUS[0]}
+
+      - name: Exibir erros de build (se falhou)
+        if: failure()
+        run: |
+          echo "===== ERROS DE COMPILAÇÃO ====="
+          grep -E "(error:|FAILED|Exception|Unresolved|Could not|> Task|e:)" build_output.txt | head -100 || true
+          echo ""
+          echo "===== ÚLTIMAS 150 LINHAS DO LOG ====="
+          tail -150 build_output.txt
 
       - name: Publicar APK como artefato
         if: success()
@@ -39,8 +49,10 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
-      - name: Informações do APK
-        if: success()
-        run: |
-          echo "=== APK gerado com sucesso ==="
-          ls -lh app/build/outputs/apk/debug/
+      - name: Publicar log de build (para diagnóstico)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build_output.txt
+          retention-days: 7
