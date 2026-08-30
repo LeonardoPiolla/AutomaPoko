@@ -29,19 +29,22 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK debug
-        id: build
         run: ./gradlew assembleDebug 2>&1 | tee build_output.txt; exit ${PIPESTATUS[0]}
 
-      - name: Exibir erros de build (se falhou)
+      - name: Resumo de erros no GitHub Summary
         if: failure()
         run: |
-          echo "===== ERROS DE COMPILAÇÃO ====="
-          grep -E "(error:|FAILED|Exception|Unresolved|Could not|> Task|e:)" build_output.txt | head -100 || true
-          echo ""
-          echo "===== ÚLTIMAS 150 LINHAS DO LOG ====="
-          tail -150 build_output.txt
+          echo "## ❌ Erros de Compilação" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          grep -E "(error:|FAILED|Exception|Unresolved|Could not resolve|e: file|> Task)" \
+            build_output.txt | head -80 >> $GITHUB_STEP_SUMMARY || true
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Últimas 60 linhas:" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          tail -60 build_output.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
-      - name: Publicar APK como artefato
+      - name: Publicar APK
         if: success()
         uses: actions/upload-artifact@v4
         with:
@@ -49,7 +52,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
-      - name: Publicar log de build (para diagnóstico)
+      - name: Publicar log completo
         if: always()
         uses: actions/upload-artifact@v4
         with:
