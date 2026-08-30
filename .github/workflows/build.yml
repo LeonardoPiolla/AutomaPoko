@@ -31,18 +31,19 @@ jobs:
       - name: Build APK debug
         run: ./gradlew assembleDebug 2>&1 | tee build_output.txt; exit ${PIPESTATUS[0]}
 
-      - name: Resumo de erros no GitHub Summary
+      - name: Postar erros como Issue
         if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "## ❌ Erros de Compilação" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          grep -E "(error:|FAILED|Exception|Unresolved|Could not resolve|e: file|> Task)" \
-            build_output.txt | head -80 >> $GITHUB_STEP_SUMMARY || true
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Últimas 60 linhas:" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          tail -60 build_output.txt >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          ERRORS=$(grep -E "(error:|FAILED|Exception|Unresolved|e: file)" build_output.txt | head -60 || true)
+          TAIL=$(tail -80 build_output.txt)
+          BODY="## Erros de compilação\n\`\`\`\n${ERRORS}\n\`\`\`\n\n## Últimas 80 linhas\n\`\`\`\n${TAIL}\n\`\`\`"
+          gh issue create \
+            --title "Build log: $(date '+%Y-%m-%d %H:%M')" \
+            --body "$BODY" \
+            --label "build-log" \
+            --repo ${{ github.repository }} || true
 
       - name: Publicar APK
         if: success()
